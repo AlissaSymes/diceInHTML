@@ -1,0 +1,125 @@
+<DOCTYPE !>
+    <html>
+        <head>
+            <title>D&D Dice!</title>
+            <script>
+                
+                function rollDice(form)
+                {
+                    
+                    // Checks to see if the user input is valid
+                    
+                    var rollNumber = document.getElementById("numberOfDice").value ;
+                    if (rollNumber >= 1 && rollNumber <= 10)
+                        {
+                            rollNumber = rollNumber ;
+                        }
+                    else
+                        {
+                            rollNumber = 0 ;
+                            document.getElementById("diceResults").innerHTML = "Choose a valid number between 1 and 10." ;
+                        }
+                    
+                    
+                    
+                    // if valid program continues
+                    
+                    if (rollNumber != 0)
+                        {
+                            // determines which radio button is selected
+                            var diceChoices = document.getElementsByName("dice") ;
+                            for (var i = 0, amount = diceChoices.length ; i < amount ; i++)
+                                {
+                                    if (diceChoices[i].checked)
+                                        {
+                                            var diceToRoll = Number(diceChoices[i].value) ;
+                                            break ;
+                                        }
+                                }
+                            
+                            
+                            
+                            
+                            // Function to roll the dice
+                            
+                            function roll()
+                            {
+                                if (diceToRoll <=8 || diceToRoll >=12 && diceToRoll <=20)
+                                    {
+                                        var diceResult = Math.floor((Math.random() * diceToRoll) + 1) ;
+                                        return diceResult ;
+                                    }
+                                else
+                                    {
+                                        if (diceToRoll == 10)
+                                            {
+                                                var diceResult = Math.floor((Math.random() * diceToRoll)) ;
+                                                return diceResult ;
+                                            }
+                                        else
+                                            {
+                                                var diceResultOne = Math.floor(Math.random() * 10) ;
+                                                var diceResultTwo = Math.floor(Math.random() * 10) ;
+                                                diceResultTwo *= 10 ;
+                                                if (diceResultTwo == 0)
+                                                    {
+                                                        diceResultTwo = "00" ;
+                                                    }
+                                                return diceResultTwo + ", " + diceResultOne ;
+                                            }
+                                    }
+                            }
+                            
+                            
+                            
+                            // Setting the results
+                            
+                            document.getElementById("diceResults").innerHTML = "" ;
+                             if (rollNumber > 1)
+                                    {
+                                        if (diceToRoll !=100)
+                                            {
+                                                for(var i = 0, times = rollNumber-1; i<times; i++)
+                                                {
+                                                    document.getElementById("diceResults").innerHTML += roll() + ", " ;
+                                                }
+                                                document.getElementById("diceResults").innerHTML += roll() ;
+                                
+                                            }
+                                        else
+                                            {
+                                                document.getElementById("diceResults").innerHTML = "You can only roll one d100." ;
+                                            }
+                                    }
+                            else
+                                {
+                                    document.getElementById("diceResults").innerHTML = roll() ;
+                                }
+                            }
+                        }
+            </script>
+        </head>
+        <body style="text-align:center;">
+            <h1>D&D Dice!</h1>
+            <br>
+            <form>
+                Roll:
+                <input type="text" name="numberOfDice" value="1" id="numberOfDice">
+                &nbsp; &nbsp; &nbsp;
+                <input type="radio" name="dice" value="4"> d4
+                <input type="radio" name="dice" value="6"> d6
+                <input type="radio" name="dice" value="8"> d8
+                <input type="radio" name="dice" value="10"> d10
+                <input type="radio" name="dice" value="12"> d12
+                <input type="radio" name="dice" value="20" checked> d20
+                <input type="radio" name="dice" value="100"> d100
+                <br>
+                <br>
+                <button type="button" onclick="rollDice(this.form);">Roll Dice!</button>
+            </form>
+            <br>
+            <br>
+            <h2 id="diceResults"></h2>
+        </body>
+    </html>
+</DOCTYPE>
