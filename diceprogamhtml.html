@@ -10,14 +10,14 @@
                     // Checks to see if the user input is valid
                     
                     var rollNumber = document.getElementById("numberOfDice").value ;
-                    if (rollNumber >= 1 && rollNumber <= 10)
+                    if (rollNumber >= 1 && rollNumber <= 100)
                         {
                             rollNumber = rollNumber ;
                         }
                     else
                         {
                             rollNumber = 0 ;
-                            document.getElementById("diceResults").innerHTML = "Choose a valid number between 1 and 10." ;
+                            document.getElementById("diceResults").innerHTML = "Choose a valid number between 1 and 100." ;
                         }
                     
                     
